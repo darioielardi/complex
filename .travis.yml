@@ -1,23 +1,28 @@
 
 sudo: required
 services:
-  - docker
+  # - docker
 
 before_install:
-  - docker build -t darioielardi/react-test -f ./client/Dockerfile.dev ./client
+  # - docker build -t darioielardi/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run darioielardi/react-test npm run test -- --coverage
+  # - docker run darioielardi/react-test npm run test -- --coverage
+  - echo "Script!"
 
 after_success:
-  - docker build -t darioielardi/multi-client ./client
-  - docker build -t darioielardi/multi-nginx ./nginx
-  - docker build -t darioielardi/multi-server ./server
-  - docker build -t darioielardi/multi-worker ./worker
+  - echo "DOCKER PASSWORD:"
+  - echo "$DOCKER_PASSWORD"
+  - echo "DOCKER USERNAME:"
+  - echo "$DOCKER_USERNAME"
+  # - docker build -t darioielardi/multi-client ./client
+  # - docker build -t darioielardi/multi-nginx ./nginx
+  # - docker build -t darioielardi/multi-server ./server
+  # - docker build -t darioielardi/multi-worker ./worker
 
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-  - docker push darioielardi/multi-client
-  - docker push darioielardi/multi-nginx
-  - docker push darioielardi/multi-server
-  - docker push darioielardi/multi-worker
+  # - docker push darioielardi/multi-client
+  # - docker push darioielardi/multi-nginx
+  # - docker push darioielardi/multi-server
+  # - docker push darioielardi/multi-worker
